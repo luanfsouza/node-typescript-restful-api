@@ -13,6 +13,8 @@
   },
   "scripts": {
     "dev": "ts-node-dev ./src/index.ts",
+    "postinstall": "tsc",
+    "start": "node ./build/src/index.js",
     "test": "jest"
   },
   "dependencies": {

@@ -44,6 +44,6 @@ exports.createValidation = (0, middleware_1.validation)((getSchema) => ({
 //export const createBodyValidation = validation("body", bodyValidation);
 const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("cidade adicionada!");
-    return res.status(http_status_codes_1.StatusCodes.CREATED).json(1);
+    return res.status(http_status_codes_1.StatusCodes.CREATED).json(req.body);
 });
 exports.create = create;

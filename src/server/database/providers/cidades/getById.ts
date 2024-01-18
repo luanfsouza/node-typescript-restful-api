@@ -6,9 +6,9 @@ export const getById = async (id: number): Promise<ICidade | Error> => {
     const result = await Knex(ETableNames.cidade).select("*").where({ id: id }).first();
 
     if (result) return result;
-    return new Error("Error ao cadastrar o registro");
+    return new Error("Error ao consultar o registro");
   } catch (error) {
     console.log("o error aqui seu otarioooooooooooo\n", error);
-    return new Error("Error ao cadastrar o registro");
+    return new Error("Error ao consultar o registro");
   }
 };

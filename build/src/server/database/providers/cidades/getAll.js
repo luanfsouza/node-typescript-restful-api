@@ -31,8 +31,7 @@ const getAll = (page, limit, filter, id = 0) => __awaiter(void 0, void 0, void 0
         return result;
     }
     catch (error) {
-        console.log("aaaaaaaaaaaaaaaaaaaaaaa", error);
-        return new Error("Error ao cadastrar o registro");
+        return new Error("Error ao consultar o registro");
     }
 });
 exports.getAll = getAll;

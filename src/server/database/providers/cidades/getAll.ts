@@ -25,7 +25,6 @@ export const getAll = async (
     }
     return result;
   } catch (error) {
-    console.log("aaaaaaaaaaaaaaaaaaaaaaa",error);
-    return new Error("Error ao cadastrar o registro");
+    return new Error("Error ao consultar o registro");
   }
 };

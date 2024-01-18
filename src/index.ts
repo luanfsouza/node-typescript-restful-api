@@ -11,6 +11,7 @@ if (process.env.IS_LOCALHOST !== "true") {
   Knex.migrate
     .latest()
     .then(() => {
+      console.debug("Migração concluída");
       startServer();
     })
     .catch(console.log);

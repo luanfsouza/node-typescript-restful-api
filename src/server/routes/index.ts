@@ -1,4 +1,4 @@
-import { Request, Response, Router } from "express";
+import { Request, Response, Router, request } from "express";
 import { StatusCodes } from "http-status-codes";
 
 import { CidadesController } from "../controllers";
@@ -32,5 +32,8 @@ router.delete(
   CidadesController.deleteByIdValidation,
   CidadesController.deleteById
 );
+router.get("/", (req: Request, res: Response) => {
+  res.status(StatusCodes.OK).send("Ola dev!");
+});
 
 export { router };

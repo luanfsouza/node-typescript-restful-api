@@ -18,6 +18,7 @@
     "dev": "ts-node-dev ./src/index.ts",
     "postinstall": "tsc",
     "start": "node ./build/src/index.js",
+    "build": "yarn tsc",
     "test": "jest",
     "knex:migrate": "knex --knexfile ./src/server/database/knex/environment.ts migrate:latest",
     "knex:rollback": "knex --knexfile ./src/server/database/knex/environment.ts migrate:rollback",

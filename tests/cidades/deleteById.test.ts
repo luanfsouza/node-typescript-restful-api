@@ -9,7 +9,7 @@ describe("cidades - DeleteById", () => {
       .send({ nome: "Caxias do Sul" });
 
     expect(res1.statusCode).toEqual(StatusCodes.CREATED);
-
+    console.log("id da cidade acabei de criar", res1.body);
     const resApagada = await testServer.delete(`/cidades/${res1.body}`).send();
 
     expect(resApagada.statusCode).toEqual(StatusCodes.NO_CONTENT);
@@ -20,6 +20,5 @@ describe("cidades - DeleteById", () => {
 
     expect(res2.statusCode).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
     expect(res2.body).toHaveProperty("errors.default");
-    
   });
 });

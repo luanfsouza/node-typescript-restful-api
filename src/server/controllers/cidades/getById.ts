@@ -17,6 +17,13 @@ export const getByIdValidation = validation((getSchema) => ({
 }));
 
 export const getById = async (req: Request<IParamProps>, res: Response) => {
+  if (!req.params.id) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      errors: {
+        default: "O parâmetro 'ID' precisa ser informado/valido",
+      },
+    });
+  }
   const result = await CidadesProvider.getById(Number(req.params.id));
   if (result instanceof Error) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -32,8 +39,5 @@ export const getById = async (req: Request<IParamProps>, res: Response) => {
       },
     });
 
-  return res.status(StatusCodes.OK).json({
-    id: req.params.id,
-    nome: "Caxias do Sul",
-  });
+  return res.status(StatusCodes.OK).json(result);
 };

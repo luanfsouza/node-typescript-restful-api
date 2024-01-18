@@ -17,7 +17,15 @@ export const deleteByIdValidation = validation((getSchema) => ({
 }));
 
 export const deleteById = async (req: Request<IParamProps>, res: Response) => {
-  const result = await CidadesProvider.deleteById(Number(req.params.id));
+  if (!req.params.id) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      errors: {
+        default: "O parâmetro 'ID' precisa ser informado/valido",
+      },
+    });
+  }
+
+  const result = await CidadesProvider.deleteById(req.params.id);
   if (result instanceof Error) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       errors: {

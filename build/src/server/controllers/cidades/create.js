@@ -36,14 +36,22 @@ exports.create = exports.createValidation = void 0;
 const http_status_codes_1 = require("http-status-codes");
 const yup = __importStar(require("yup"));
 const middleware_1 = require("../../shared/middleware");
+const cidades_1 = require("../../database/providers/cidades");
 exports.createValidation = (0, middleware_1.validation)((getSchema) => ({
     body: getSchema(yup.object().shape({
-        nome: yup.string().required().min(3),
+        nome: yup.string().required().min(3).max(150),
     })),
 }));
 //export const createBodyValidation = validation("body", bodyValidation);
 const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("cidade adicionada!");
-    return res.status(http_status_codes_1.StatusCodes.CREATED).json(req.body);
+    const result = yield cidades_1.CidadesProvider.create(req.body);
+    if (result instanceof Error) {
+        return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({
+            errors: {
+                default: result.message,
+            },
+        });
+    }
+    return res.status(http_status_codes_1.StatusCodes.CREATED).json(result);
 });
 exports.create = create;

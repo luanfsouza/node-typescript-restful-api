@@ -36,12 +36,28 @@ exports.deleteById = exports.deleteByIdValidation = void 0;
 const http_status_codes_1 = require("http-status-codes");
 const yup = __importStar(require("yup"));
 const middleware_1 = require("../../shared/middleware");
+const cidades_1 = require("../../database/providers/cidades");
 exports.deleteByIdValidation = (0, middleware_1.validation)((getSchema) => ({
     params: getSchema(yup.object().shape({
         id: yup.number().integer().required().moreThan(0),
     })),
 }));
 const deleteById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    if (!req.params.id) {
+        return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({
+            errors: {
+                default: "O parâmetro 'ID' precisa ser informado/valido",
+            },
+        });
+    }
+    const result = yield cidades_1.CidadesProvider.deleteById(req.params.id);
+    if (result instanceof Error) {
+        return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({
+            errors: {
+                default: result.message,
+            },
+        });
+    }
     if (Number(req.params.id) === 99999)
         return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({
             errors: {

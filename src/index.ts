@@ -12,7 +12,7 @@ if (process.env.IS_LOCALHOST !== "true") {
     .latest()
     .then(() => {
       console.debug("Migração concluída");
-      startServer();
+      Knex.seed.run().then(() => startServer()).catch(error => console.log(error));
     })
     .catch(console.log);
 } else {

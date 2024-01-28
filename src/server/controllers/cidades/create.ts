@@ -11,7 +11,7 @@ interface IBodyProps extends Omit<ICidade, "id"> {
 // const bodyValidation: yup.Schema<ICidade> = yup.object().shape({
 //   nome: yup.string().required().min(3),
 //   estado: yup.string().required().min(4),
-// });
+// }); 
 
 interface IFilter {
   filter?: string;
